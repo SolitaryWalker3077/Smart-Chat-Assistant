@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS chat_sessions
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    chat_id VARCHAR(36) NOT NULL,
+    title VARCHAR(127) NOT NULL DEFAULT '新会话',
+    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_chat_sessions_chat_id (chat_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS SPRING_AI_CHAT_MEMORY
+(
+    `conversation_id`
+    VARCHAR
+(
+    36
+) NOT NULL,
+    `content` TEXT NOT NULL,
+    `type` VARCHAR
+(
+    10
+) NOT NULL,
+    `timestamp` TIMESTAMP NOT NULL,
+    INDEX `SPRING_AI_CHAT_MEMORY_CONVERSATION_ID_TIMESTAMP_IDX`
+(
+    `conversation_id`,
+    `timestamp`
+)
+    );
+
+

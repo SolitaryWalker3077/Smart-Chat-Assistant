@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/chat_bot?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: Cz.200406146737
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  ai:
+    mcp:
+      server:
+        name: ticket-service
+        version: 0.0.1
+  main:
+    web-application-type: none
+    banner-mode: off
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true #配置驼峰自动转换
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %5p ${PID:- } --- [%15.15t] %-40.40logger{39} : %m%n%wEx"

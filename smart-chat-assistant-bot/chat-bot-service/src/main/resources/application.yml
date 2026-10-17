@@ -1,0 +1,49 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: chat-bot-service
+  ai:
+    dashscope:
+      api-key: ${DASHSCOPE_API_KEY}
+      rerank:
+        options:
+          model: gte-rerank-v2
+      embedding:
+        options:
+          model: text-embedding-v3
+    vectorstore:
+      redis:
+        initialize-schema: true    # 是否自动创建索引结构
+        index-name: chat-bot   # 向量索引名称
+        prefix: "rag:"     # Redis Key 前缀
+    mcp:
+      client:
+        request-timeout: 60000
+        stdio:
+          servers-configuration: classpath:/mcp/mcp-servers-config.json
+    chat:
+      memory:
+        repository:
+          jdbc:
+            initialize-schema: always
+            schema: classpath:/sql/schema-mysql.sql
+
+  data:
+    redis:
+      url: redis://43.140.242.83:6380
+  datasource:
+    username: root
+    password: Cz.200406146737
+    url: jdbc:mysql://localhost:3306/chat_bot?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+  level:
+    org.springframework.ai.chat.client.advisor: debug
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %5p ${PID:- } --- [%15.15t] %-40.40logger{39} : %m%n%wEx"
+
+data:
+  is-load: false
+#  is-load: true
